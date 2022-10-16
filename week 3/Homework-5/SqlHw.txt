@@ -1,0 +1,49 @@
+--Select
+
+SELECT ContactName Adı, CustomerName MüşteriAdı, City Şehir FROM Customers;
+
+Select * from Customers where City = 'Berlin'
+
+--case insensitive( büyük küçük harf duyarlı değil)
+
+--git bana 1 numaralı gategoryId olanları getir
+Select * from Products where categoryId=1 
+
+--git bana 1 numaralı categoryId olanları yada categoryId 3 olanları getir
+Select * from Products where categoryId=1 or categoryId=3 
+Select * from Products where categoryId=1 and Price>10
+
+--(asc artan demek vermesenden de olur)
+--ürün ismine göre alanları sırala demek
+select*from Products order by ProductName asc
+ 
+--(desc azalan demek)
+select*from Products where categoryId=1 order by ProductName desc
+
+-- product kategorisinde kaç ürün var demek 
+select count(*) from Products 
+
+--kategori Id 2 olan ürünlerin sayısını ver dedik
+select count(*) Adet from Products where categoryId=2 
+
+--yönetim dedi ki hangi kategori de kaç farklı ürünümüz var
+select categoryId, count(*) from Products group by CategoryId
+
+--yönetim dedi ki bana içinde 10 taneden az ürün çeşidi olan kategorileri ver
+select categoryId, count(*) from Products where Price>20 group by CategoryId having count(*)<10
+
+--kategori Id leri eşit olan product ve categories lerin tablolalarını birleştirme işlem join
+select Products.ProductId, Products.ProductName, Products.Price, Categories. CategoryId, Categories.CategoryName 
+from Products inner join Categories on Products.CategoryId = Categories.CategoryId
+
+--DTO Data Transformation object
+
+--inner join sadece eşleşen kayıtları gösterir
+--left join solda olup sağda olmayanları da getirir yani burda ürünler kategorisinde var ama hiç satışı yok 
+--yönetim dedi ki satış yapamadığımız ürünleri getir
+select * from Products p left join OrderDetails od on p.ProductId = od.ProductId 
+
+--üye olmuş ama hiç ürün almamış müşteriler
+--null order da olmayıp customer da olanlar
+select * from Customers c left join Orders o on c.CustomerId = O.CustomerId where o.CustomerID is null 
+
