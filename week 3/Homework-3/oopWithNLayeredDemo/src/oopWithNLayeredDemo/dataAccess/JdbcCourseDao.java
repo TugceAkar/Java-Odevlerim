@@ -20,4 +20,12 @@ public class JdbcCourseDao implements ICourseDao{
 		
 	}
 
-}
+	@Override
+	public Course[] getAll() {
+		Course [] courses = new Course[] {new Course(1, "Java", 1000), new Course(2, "C#",2000), new Course(3, "Phyton",-5)};
+				return courses;	
+		
+	}
+	}
+
+

@@ -16,7 +16,7 @@ public class InstructorManager {
 	}
 
 	public void add(Instructor instructor) {
-
+		Instructor[] instructors = this.instructorDao.getAll();
 		this.instructorDao.add(instructor);
 
 		for (ILogger logger : loggers) {
@@ -25,7 +25,7 @@ public class InstructorManager {
 	}
 
 	public void update(Instructor instructor) {
-			
+		Instructor[] instructors = this.instructorDao.getAll();
 			this.instructorDao.update(instructor);
 			
 			for(ILogger logger : loggers) {
@@ -33,7 +33,7 @@ public class InstructorManager {
 			}
 	}
 	public void delete(Instructor instructor) {
-
+		Instructor[] instructors = this.instructorDao.getAll();
 		this.instructorDao.delete(instructor);
 
 		for (ILogger logger : loggers) {

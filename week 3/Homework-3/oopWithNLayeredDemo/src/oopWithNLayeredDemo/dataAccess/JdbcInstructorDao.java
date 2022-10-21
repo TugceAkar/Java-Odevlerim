@@ -21,6 +21,13 @@ public class JdbcInstructorDao implements IInstructorDao {
 		System.out.println("Eğitmen Jdbc ile veri tabanından silindi : "+
 				 instructor.getInstructorFirstName()+" "+ instructor.getInstructorLastName());
 		
+	
+	}
+
+	@Override
+	public Instructor[] getAll() {
+		Instructor[] instructors = new Instructor[] {new Instructor(1, "Engin", "Demiroğ"), new Instructor(2,"Tuğçe","Akar")};
+		return instructors;
 	}
 
 

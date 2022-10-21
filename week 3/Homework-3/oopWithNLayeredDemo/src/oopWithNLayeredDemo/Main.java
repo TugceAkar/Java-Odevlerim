@@ -1,7 +1,4 @@
 package oopWithNLayeredDemo;
-
-import java.util.ArrayList;
-import java.util.List;
 import oopWithNLayeredDemo.business.CategoryManager;
 import oopWithNLayeredDemo.business.CourseManager;
 import oopWithNLayeredDemo.business.InstructorManager;
@@ -23,49 +20,40 @@ public class Main {
 		ILogger[] loggers = {new DatabaseLogger(), new FileLogger(), new MailLogger()};
 
 		
-		//COURSES
+		//Category
 		
-		Course course1 = new Course(1, "C# Kursu", 900);
-		Course course2 = new Course(2, "JavaScript Kursu", 500);
-		Course course3 = new Course(3, "Phyton Kursu", 200);
-		//Course course4 = new Course(4, "Java Kursu", -200);  değer 0'ın altında olduğundan hata verir
-		//Course course5 = new Course(5, "JavaScript Kursu", -200); isim aynı olduğundan hata verir
+		Category category1 = new Category(10,"Veri Tabanı Yönetimi");
 		
-		List<Course> courses = new ArrayList<Course>();
-		CourseManager courseManager = new CourseManager(new HibernateCourseDao(), loggers);
-		
-		courseManager.add(course1);
-		//courseManager.add(course2);
-		courseManager.add(course3);
-//		courseManager.add(course4);  hatalı kodlar
-//		courseManager.add(course5);
-		courseManager.delete(course2);
-		
-		// CATEGORIES
-		
-		Category category1 = new Category(1, "Online");	
-		Category category2 = new Category(2, "Ders Notları");
-		Category category3 = new Category(3, "Sınavlar");	
-		Category category4 = new Category(4, "Online");	
-		// Category category5 = new Category(1, "Online");	hatalı kod aynı isimle yazılmış
 		CategoryManager categoryManager = new CategoryManager(new JdbcCategoryDao(),loggers);
-		categoryManager.add(category1);
-		categoryManager.add(category2);
-		//categoryManager.add(category3);
-		//categoryManager.add(category4);
-		//categoryManager.add(category5); hatalı kod
-		  categoryManager.delete(category3);
-		  categoryManager.update(category4);
+		categoryManager.update(category1);
 		
-		// INSTRUCTORS
+		System.out.println("-----------------------------------");
+//		Category category2 = new Category(11,"Programlama"); //Varolan bir kategori:Programlama
+//
+//		CategoryManager categoryManager2 = new CategoryManager(new JdbcCategoryDao(),loggers);
+//		categoryManager2.update(category2);
 		
-		Instructor instructor1 = new Instructor(1, "Engin", "Demiroğ");
-		Instructor instructor2 = new Instructor(1, "Tuğçe", "Akar");
+		//Course
 		
-		InstructorManager instructorManager = new InstructorManager(new HibernateInstructorDao(), loggers);
-		instructorManager.add(instructor1);
-		//instructorManager.add(instructor2);
-		instructorManager.update(instructor2);
-	}	
+		Course course2 = new Course(40, "JavaScript", 1500);
+		CourseManager courseManager2 = new CourseManager(new HibernateCourseDao(), loggers);
+		courseManager2.add(course2);
+		System.out.println("-----------------------------------");
+		
+//		Course course = new Course(5, "Algoritmalar", -1000);
+//		CourseManager courseManager = new CourseManager(new HibernateCourseDao(), loggers);
+//		courseManager.add(course);
+//		System.out.println("-----------------------------------");
+		
+		
+		//Instructor
+		
+		InstructorManager instructorManager = new InstructorManager( new HibernateInstructorDao(), loggers);
+		Instructor instructor = new Instructor(2,"Tuğçe", "Akar");
+		instructorManager.delete(instructor);
+		System.out.println("-----------------------------------");
 	
+	
+	}	
 }
+

@@ -21,5 +21,10 @@ public class JdbcCategoryDao implements ICategoryDao{
 		System.out.println("Jdbc ile veri tabanından silindi : "+ category.getCategoryName());
 		
 	}
+	
+	public Category[] getAll() {
+		Category[ ] categories = new Category[] {new Category(1,"Programlama"), new Category(2, "Ders Notları")};
+		return categories;
+	}
 
 }

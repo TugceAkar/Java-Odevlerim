@@ -18,10 +18,13 @@ public class CategoryManager {
 
 	}
 
-	List<Category> categories = new ArrayList<Category>();
+	
+	
 
 	public void add(Category category) throws Exception {
-		for (Category category1 : categories) {
+		
+		
+		for (Category category1 : categoryDao.getAll()) {
 			if (category1.getCategoryName().equals(category.getCategoryName())) {
 				throw new Exception("Bu kategori zaten sistemde kayıtlıdır.");
 			}
@@ -35,7 +38,8 @@ public class CategoryManager {
 	}
 
 	public void update(Category category) throws Exception {
-		for (Category category1 : categories) {
+	
+		for (Category category1 : categoryDao.getAll()) {
 			if (category1.getCategoryName().equals(category.getCategoryName()))  {
 				throw new Exception("Bu kategori zaten sistemde kayıtlıdır.");
 			}
@@ -49,7 +53,7 @@ public class CategoryManager {
 	}
 
 	public void delete(Category category) {
-
+		Category [] categories = this.categoryDao.getAll();
 		this.categoryDao.delete(category);
 
 		for (ILogger logger : loggers) {

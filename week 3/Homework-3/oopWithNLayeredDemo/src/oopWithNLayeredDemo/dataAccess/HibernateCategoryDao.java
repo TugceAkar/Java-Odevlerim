@@ -20,5 +20,11 @@ public class HibernateCategoryDao implements ICategoryDao{
 		
 	}
 
+	@Override
+	public Category[] getAll() {
+		Category[ ] categories = new Category[] {new Category(1,"Programlama"), new Category(2, "Ders Notları"), new Category(3, "Ödevler")};
+		return categories;
+	}
+
 
 }

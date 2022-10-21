@@ -23,4 +23,10 @@ public class HibernateInstructorDao implements IInstructorDao {
 		
 	}
 
+	@Override
+	public Instructor[] getAll() {
+		Instructor[] instructors = new Instructor[] {new Instructor(1, "Engin", "Demiroğ"), new Instructor(2,"Tuğçe","Akar")};
+		return instructors;
+	}
+
 }

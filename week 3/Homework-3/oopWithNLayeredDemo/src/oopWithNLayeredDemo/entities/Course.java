@@ -4,6 +4,7 @@ public class Course {
 	 	private int courseId;
 	    private String courseName;
 	    private double coursePrice;
+	    
 		public Course() {
 			super();
 		}
