@@ -45,7 +45,11 @@ public class TechnologiesController {
 		technologyService.update(updateTechnologyRequests);
 	}
 	@DeleteMapping("/delete")
-	public void delete(DeleteTechnologyRequests deleteTechnologyRequests) {
+	public void delete(DeleteTechnologyRequests deleteTechnologyRequests) throws Exception {
 		technologyService.delete(deleteTechnologyRequests);
+	}
+	@RequestMapping("deleteAll")
+	public void deleteAll(DeleteTechnologyRequests deleteTechnologyRequests) {
+		technologyService.deleteAll(deleteTechnologyRequests);
 	}
 }

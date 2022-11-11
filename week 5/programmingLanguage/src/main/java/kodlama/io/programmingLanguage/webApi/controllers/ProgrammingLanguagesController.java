@@ -50,7 +50,7 @@ public class ProgrammingLanguagesController {
 	}
 
 	@DeleteMapping("/delete")
-	public void delete(DeleteProgrammigLanguageRequests deleteProgrammigLanguageRequests) {
+	public void delete(DeleteProgrammigLanguageRequests deleteProgrammigLanguageRequests) throws Exception {
 		languageService.delete(deleteProgrammigLanguageRequests);
 	}
 }

@@ -6,6 +6,9 @@ import kodlama.io.programmingLanguage.entities.concretes.Technology;
 
 public interface TechnologyRepository extends JpaRepository<Technology, Integer>{
 
+
+	
+
 	
 }
 	

@@ -42,48 +42,35 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 
 	@Override
 	public void add(AddProgrammigLanguageRequests addProgrammigLanguageRequests) throws Exception {
-		ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
-		programmingLanguage.setName(addProgrammigLanguageRequests.getName());
+		existingCheck(addProgrammigLanguageRequests.getName());
+		emptyCheck(addProgrammigLanguageRequests.getName());
 		
-		for (ProgrammingLanguage languages : this.languageRepository.findAll()) {
-			if (languages.getName().equals(programmingLanguage.getName())) {
-				throw new Exception("Bu dil mevcuttur. Farklı bir dil giriniz");
-			}
-
-			if (languages.getName().isBlank()) {
-				throw new Exception("Bu alan boş bırakılamaz. Lütfen bir dil girin.");
-			}
-
-		}
+		ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
+		programmingLanguage.setName(addProgrammigLanguageRequests.getName()); //mapping yaptım
+		
+		
 		languageRepository.save(programmingLanguage);
 
 	}
 
 	@Override
 	public void update(UpdateProgrammigLanguageRequests updateProgrammigLanguageRequests) throws Exception {
+		identityCheck(updateProgrammigLanguageRequests.getId(), "Update");
+		existingCheck(updateProgrammigLanguageRequests.getName());
+		emptyCheck(updateProgrammigLanguageRequests.getName());
+		
 		
 		ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
 		programmingLanguage.setName(updateProgrammigLanguageRequests.getName());
 		programmingLanguage.setId(updateProgrammigLanguageRequests.getId());
 		
-		for (ProgrammingLanguage languages : this.languageRepository.findAll()) {
-			if (languages.getName().equals(programmingLanguage.getName())) {	
-				throw new Exception("Bu dil mevcuttur. Farklı bir dil giriniz");
-			}
-
-			if (languages.getName().isBlank()) {
-				throw new Exception("Bu alan boş bırakılamaz. Lütfen bir dil girin.");
-			}
-			if (programmingLanguage.getId()!= languages.getId()) {
-				throw new Exception("Varolmayan bir dili güncelleyemezsin.");
-			}
-
-		}
+		
 		languageRepository.save(programmingLanguage);
 	}
 
 	@Override
-	public void delete(DeleteProgrammigLanguageRequests deleteProgrammigLanguageRequests) {
+	public void delete(DeleteProgrammigLanguageRequests deleteProgrammigLanguageRequests) throws Exception {
+		identityCheck(deleteProgrammigLanguageRequests.getId(), "Delete");
 		ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
 		programmingLanguage.setId(deleteProgrammigLanguageRequests.getId());
 		languageRepository.delete(programmingLanguage);
@@ -99,5 +86,40 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 
 		return languageResponseItem;
 	}
-
+	private void identityCheck(int id, String op) throws Exception {
+		List<ProgrammingLanguage> language = this.languageRepository.findAll();
+		boolean await = true;
+			for(ProgrammingLanguage languages : language) {
+				if(languages.getId()== id) {
+				await = false;
+				break;
+			}			
+				}
+			if(await) {
+				if(op=="Update") {
+					throw new Exception("Varolmayan dili güncelleyemezsin");
+				}
+				else {
+					throw new Exception("Varolmayan dili silemezsin");
+				}
+			}
+	}
+	private void existingCheck(String name) throws Exception {
+		List<ProgrammingLanguage> language = this.languageRepository.findAll();
+		boolean await=false;
+		for(ProgrammingLanguage languages : language) {
+			if(languages.getName().equals(name)){
+				await = true;
+				break;
+			}
+			if(await) {
+				throw new Exception("Bu dil mevcuttur. Farklı bir dil giriniz");
+			}
+		}
+	}
+	private void emptyCheck(String name) throws Exception {
+		if(name.isBlank()) {
+			throw new Exception("Bu alan boş bırakılamaz");
+		}
+	}
 }

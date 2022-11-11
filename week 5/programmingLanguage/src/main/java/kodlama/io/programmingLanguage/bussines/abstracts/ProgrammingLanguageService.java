@@ -12,7 +12,7 @@ public interface ProgrammingLanguageService {
 	
 	void add(AddProgrammigLanguageRequests addProgrammigLanguageRequests ) throws Exception;
 	void update(UpdateProgrammigLanguageRequests updateProgrammigLanguageRequests) throws Exception;
-	void delete(DeleteProgrammigLanguageRequests deleteProgrammigLanguageRequests);
+	void delete(DeleteProgrammigLanguageRequests deleteProgrammigLanguageRequests) throws Exception;
 
 	GetByIdProgrammingLanguageResponse getById(int id);
 	List<GetAllProgrammingLanguageResponse> getAll() throws Exception;
